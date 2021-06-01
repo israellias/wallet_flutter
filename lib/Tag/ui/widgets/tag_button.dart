@@ -23,7 +23,7 @@ class _TagButtonState extends State<TagButton> {
           child: Padding(
             padding: EdgeInsets.all(16),
             child: Text(
-              tag.tagId == null ? 'Add' : 'Edit',
+              tag?.tagId == null ? 'Add' : 'Edit',
               style: TextStyle(
                 fontSize: 16,
               ),
@@ -36,7 +36,7 @@ class _TagButtonState extends State<TagButton> {
 
   void submit(Tag tag) {
     final String tagAmount = context.read(tagAmountProvider).state;
-    if (tag.tagId == null) {
+    if (tag?.tagId == null) {
       FirebaseFirestore.instance
           .collection('tags')
           .add({

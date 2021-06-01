@@ -84,7 +84,7 @@ class _AppState extends State<MyApp> {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => MyHomePage(title: 'Amount tags'),
+        '/': (context) => MyHomePage(),
         '/tag/': (context) => TagScreen(),
       },
     );
