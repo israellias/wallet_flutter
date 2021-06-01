@@ -19,7 +19,10 @@ class MyHomePage extends ConsumerWidget {
         children: <Widget>[
           Expanded(
             child: StreamBuilder(
-              stream: FirebaseFirestore.instance.collection('tags').snapshots(),
+              stream: FirebaseFirestore.instance
+                  .collection('tags')
+                  .orderBy('created_at', descending: true)
+                  .snapshots(),
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (!snapshot.hasData) return SizedBox.shrink();
                 int length = snapshot.data.docs.length;
