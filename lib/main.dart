@@ -1,17 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wallet_flutter/Home/ui/screens/home.dart';
 import 'package:wallet_flutter/Tag/ui/screens/tag_screen.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
-}
-
-class MyApps extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {}
+  runApp(ProviderScope(
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {

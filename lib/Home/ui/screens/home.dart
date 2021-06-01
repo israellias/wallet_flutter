@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:wallet_flutter/Home/ui/widgets/tag_card.dart';
+import 'package:wallet_flutter/Tag/model/tag.dart';
 import 'package:wallet_flutter/base/ui/widgets/valiu_app_bar.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
@@ -37,8 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemCount: length,
                   itemBuilder: (context, index) {
                     return TagCard(
-                      tagId: snapshot.data.docs[index].id,
-                      tag: snapshot.data.docs[index].data(),
+                      tag: Tag.fromJsonSnapshot(snapshot.data.docs[index]),
                     );
                   },
                 );

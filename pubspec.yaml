@@ -24,8 +24,6 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  bloc: ^6.0.0
-  flutter_bloc: ^6.0.1
   http:
   meta:
   equatable: ^1.2.2
@@ -48,6 +46,8 @@ dependencies:
   firebase_core: ^1.2.0
   cloud_firestore: ^2.2.0
 
+  # State management
+  flutter_riverpod: ^0.14.0+1
 
 
 
