@@ -1,8 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wallet_flutter/Home/ui/widgets/tag_card.dart';
-import 'package:wallet_flutter/Tag/model/tag.dart';
+import 'package:wallet_flutter/Home/ui/widgets/tags_viewer.dart';
 import 'package:wallet_flutter/Tag/provider/tag_provider.dart';
 import 'package:wallet_flutter/base/ui/widgets/valiu_app_bar.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
@@ -18,28 +16,7 @@ class MyHomePage extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Expanded(
-            child: StreamBuilder(
-              stream: FirebaseFirestore.instance
-                  .collection('tags')
-                  .orderBy('created_at', descending: true)
-                  .snapshots(),
-              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                if (!snapshot.hasData) return SizedBox.shrink();
-                int length = snapshot.data.docs.length;
-                if (length == 0)
-                  return Center(
-                    child: Text('Aún no has agregado tags'),
-                  );
-                return ListView.builder(
-                  itemCount: length,
-                  itemBuilder: (context, index) {
-                    return TagCard(
-                      tag: Tag.fromJsonSnapshot(snapshot.data.docs[index]),
-                    );
-                  },
-                );
-              },
-            ),
+            child: TagsViewer(),
           ),
           Container(
             width: double.infinity,
