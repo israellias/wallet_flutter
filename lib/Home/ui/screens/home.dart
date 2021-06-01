@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:wallet_flutter/Home/ui/widgets/tag_card.dart';
 import 'package:wallet_flutter/base/ui/widgets/valiu_app_bar.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
@@ -35,10 +36,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 return ListView.builder(
                   itemCount: length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(
-                        snapshot.data.docs[index].get('title').toString(),
-                      ),
+                    return TagCard(
+                      tagId: snapshot.data.docs[index].id,
+                      tag: snapshot.data.docs[index].data(),
                     );
                   },
                 );
