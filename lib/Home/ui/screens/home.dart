@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wallet_flutter/Home/ui/widgets/tags_viewer.dart';
 import 'package:wallet_flutter/Tag/provider/tag_provider.dart';
-import 'package:wallet_flutter/base/ui/widgets/logo_header.dart';
+import 'package:wallet_flutter/base/ui/widgets/valiu_sliver_app_bar.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
 class MyHomePage extends ConsumerWidget {
@@ -36,35 +36,7 @@ class MyHomePage extends ConsumerWidget {
       ),
       body: CustomScrollView(
         slivers: <Widget>[
-          SliverAppBar(
-            expandedHeight: 160,
-            backgroundColor: ValiuColor.background,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Padding(
-                padding: EdgeInsets.all(16),
-                child: SafeArea(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    textBaseline: TextBaseline.alphabetic,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          'Amount tags',
-                          style: TextStyle(
-                            color: ValiuColor.titleColor,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      LogoHeader(),
-                    ],
-                  ),
-                ),
-              ),
-              // title: Text('Hola'),
-            ),
-          ),
+          ValiuSliverAppBar(),
           TagsViewer(),
         ],
       ),

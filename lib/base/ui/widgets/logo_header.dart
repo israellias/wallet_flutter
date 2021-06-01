@@ -5,7 +5,7 @@ class LogoHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(maxHeight: 48),
+      constraints: BoxConstraints(maxHeight: 36),
       margin: EdgeInsets.symmetric(vertical: 4),
       child: SvgPicture.asset(
         'assets/img/logo.svg',
