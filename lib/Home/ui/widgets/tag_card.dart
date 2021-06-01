@@ -20,6 +20,7 @@ class TagCard extends ConsumerWidget {
         padding: EdgeInsets.all(8),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
           children: [
             Container(
               width: 10,
@@ -29,29 +30,30 @@ class TagCard extends ConsumerWidget {
                 shape: BoxShape.circle,
               ),
             ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    KeyPadUtils.format(tag.amount.toString()),
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: ValiuColor.textColor,
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      KeyPadUtils.format(tag.amount.toString()),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: ValiuColor.textColor,
+                      ),
                     ),
-                  ),
-                  Text(
-                    tag.title,
-                    style: TextStyle(
-                      color: ValiuColor.gray1,
-                    ),
-                  )
-                ],
+                    Text(
+                      tag.title,
+                      style: TextStyle(
+                        color: ValiuColor.gray1,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-            Spacer(),
             TextButton(
               onPressed: () {
                 // setting current tag;
