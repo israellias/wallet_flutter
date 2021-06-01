@@ -34,7 +34,7 @@ class KeyPadUtils {
         newAmount = amount + '9';
         break;
       case KeyEnum.COMMA:
-        newAmount = amount.endsWith(',') ? amount : amount + ',';
+        newAmount = amount.contains(',') ? amount : amount + ',';
         break;
       case KeyEnum.ZERO:
         newAmount = amount + '0';
@@ -55,7 +55,7 @@ class KeyPadUtils {
     String result = formatter.format(numberResult);
 
     // result
-    return forceComma ? '${result},' : result;
+    return forceComma && !result.contains(',') ? '${result},' : result;
   }
 
   static double toDouble(String n) {
