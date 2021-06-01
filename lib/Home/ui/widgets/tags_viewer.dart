@@ -17,19 +17,22 @@ class _TagsViewerState extends State<TagsViewer> {
           .orderBy('created_at', descending: true)
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-        if (!snapshot.hasData) return SizedBox.shrink();
+        if (!snapshot.hasData)
+          return SliverToBoxAdapter(child: SizedBox.shrink());
         int length = snapshot.data.docs.length;
-        if (length == 0)
-          return Center(
-            child: Text('Aún no has agregado tags'),
+        if (length == 0) {
+          return SliverToBoxAdapter(
+            child: Center(
+              child: Text('Aún no has agregado tags'),
+            ),
           );
-        return ListView.builder(
-          itemCount: length,
-          itemBuilder: (context, index) {
+        }
+        return SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
             return TagCard(
               tag: Tag.fromJsonSnapshot(snapshot.data.docs[index]),
             );
-          },
+          }, childCount: length),
         );
       },
     );
