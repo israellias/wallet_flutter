@@ -6,12 +6,14 @@ class ValiuAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool withLogo;
   final bool goBackButton;
+  final double textSize;
 
   const ValiuAppBar({
     Key key,
     this.title,
     this.withLogo = true,
     this.goBackButton = false,
+    this.textSize = 32.0,
   }) : super(key: key);
 
   @override
@@ -28,7 +30,7 @@ class ValiuAppBar extends StatelessWidget implements PreferredSizeWidget {
             if (goBackButton)
               IconButton(
                 icon: Icon(Icons.arrow_back),
-                iconSize: 32,
+                iconSize: textSize,
                 onPressed: () => Navigator.pop(context),
               ),
             if (goBackButton) SizedBox(width: 8),
@@ -36,7 +38,7 @@ class ValiuAppBar extends StatelessWidget implements PreferredSizeWidget {
               title,
               style: TextStyle(
                 color: ValiuColor.titleColor,
-                fontSize: 32,
+                fontSize: textSize,
                 fontWeight: FontWeight.bold,
               ),
             ),
