@@ -34,6 +34,7 @@ class _AppState extends State<MyApp> {
     } catch (e) {
       // Set `_error` state to true if Firebase initialization fails
       setState(() {
+        print(e);
         _error = true;
       });
     }

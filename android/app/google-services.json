@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "928682320931",
+    "project_id": "walletflutter-e4492",
+    "storage_bucket": "walletflutter-e4492.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928682320931:android:04f2da290fd5a12bd87d96",
+        "android_client_info": {
+          "package_name": "com.israellias.walletflutter.wallet_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "928682320931-jhc921qt9tcvl126febm43gmkiaculjp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJPAbGEAcXoJQiDGo3-hXrOpX2J5uw9h0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "928682320931-jhc921qt9tcvl126febm43gmkiaculjp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "928682320931-v2k5fok79vs8qjh4frq9ku7lu3rinv7i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.israellias.walletflutter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
