@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:wallet_flutter/base/ui/widgets/valiu_app_bar.dart';
+import 'package:wallet_flutter/base/utils/colors.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -12,14 +13,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,13 +42,29 @@ class _MyHomePageState extends State<MyHomePage> {
                     );
                   },
                 );
-                // return ListView(
-                //   children: snapshot.data.docs.map<,
-                // )
               },
             ),
           ),
-
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/tag/');
+              },
+              child: Container(
+                margin: EdgeInsets.all(16),
+                child: Text(
+                  'Create amount tag',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: ValiuColor.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

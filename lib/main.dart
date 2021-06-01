@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:wallet_flutter/Home/ui/screens/home.dart';
+import 'package:wallet_flutter/Tag/ui/screens/tag_screen.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
 void main() {
@@ -86,6 +86,7 @@ class _AppState extends State<MyApp> {
       initialRoute: '/',
       routes: {
         '/': (context) => MyHomePage(title: 'Amount tags'),
+        '/tag/': (context) => TagScreen(),
       },
     );
   }

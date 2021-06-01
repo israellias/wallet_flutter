@@ -4,10 +4,14 @@ import 'package:wallet_flutter/base/utils/colors.dart';
 
 class ValiuAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final bool withLogo;
+  final bool goBackButton;
 
   const ValiuAppBar({
     Key key,
     this.title,
+    this.withLogo = true,
+    this.goBackButton = false,
   }) : super(key: key);
 
   @override
@@ -16,9 +20,18 @@ class ValiuAppBar extends StatelessWidget implements PreferredSizeWidget {
       padding: EdgeInsets.all(16),
       child: SafeArea(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: goBackButton
+              ? CrossAxisAlignment.center
+              : CrossAxisAlignment.end,
+          textBaseline: TextBaseline.alphabetic,
           children: [
+            if (goBackButton)
+              IconButton(
+                icon: Icon(Icons.arrow_back),
+                iconSize: 32,
+                onPressed: () => Navigator.pop(context),
+              ),
+            if (goBackButton) SizedBox(width: 8),
             Text(
               title,
               style: TextStyle(
@@ -27,7 +40,8 @@ class ValiuAppBar extends StatelessWidget implements PreferredSizeWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            LogoHeader(),
+            if (withLogo) Spacer(),
+            if (withLogo) LogoHeader(),
           ],
         ),
       ),
