@@ -37,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     labelText: 'Número de teléfono',
                   ),
                 ),
-                SizedBox(width: 16),
+                SizedBox(height: 16),
                 Visibility(
                   visible: verificationId != null,
                   child: TextField(
@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                SizedBox(width: 16),
+                SizedBox(height: 16),
                 Consumer(
                   builder: (context, watch, child) {
                     return Column(

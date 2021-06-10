@@ -85,7 +85,7 @@ class _AppState extends State<MyApp> {
       initialRoute: '/',
       routes: {
         '/': (context) => AppRouter(),
-        '/tag/': (context) => NumPad(),
+        '/numpad/': (context) => NumPad(),
       },
     );
   }

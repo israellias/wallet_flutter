@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wallet_flutter/Budget/model/budget.dart';
-import 'package:wallet_flutter/Budget/provider/buget_provider.dart';
-import 'package:wallet_flutter/Budget/utils/key_pad_utils.dart';
 import 'package:wallet_flutter/Budget/utils/budget_collection.dart';
+import 'package:wallet_flutter/Budget/utils/key_pad_utils.dart';
+import 'package:wallet_flutter/base/provider/pad_provider.dart';
+import 'package:wallet_flutter/base/ui/screens/numpad.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
 class BudgetCard extends ConsumerWidget {
-  final Budget tag;
+  final Budget budget;
 
-  const BudgetCard({Key key, this.tag}) : super(key: key);
+  const BudgetCard({Key key, this.budget}) : super(key: key);
 
   @override
   Widget build(BuildContext context, watch) {
@@ -26,7 +27,7 @@ class BudgetCard extends ConsumerWidget {
               width: 10,
               height: 10,
               decoration: BoxDecoration(
-                color: Colors.primaries[tag.color],
+                color: Colors.primaries[budget.color],
                 shape: BoxShape.circle,
               ),
             ),
@@ -37,7 +38,7 @@ class BudgetCard extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      KeyPadUtils.format(tag.amount.toString()),
+                      KeyPadUtils.format(budget.amount.toString()),
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -45,7 +46,7 @@ class BudgetCard extends ConsumerWidget {
                       ),
                     ),
                     Text(
-                      tag.title,
+                      budget.title,
                       style: TextStyle(
                         color: AppColor.gray1,
                       ),
@@ -56,18 +57,43 @@ class BudgetCard extends ConsumerWidget {
             ),
             TextButton(
               onPressed: () {
-                // setting current tag;
-                context.read(budgetProvider.notifier).state = tag;
+                // setting current budget;
+                context.read(budgetProvider.notifier).state = budget;
 
-                context.read(budgetAmountProvider.notifier).state =
-                    KeyPadUtils.format(tag.amount.toString())
+                context.read(amountPadProvider.notifier).state =
+                    KeyPadUtils.format(budget.amount.toString())
                         .replaceAll('.', '');
+
+                context.read(titleProvider).state = budget.title;
 
                 context.read(forceCommaProvider.notifier).state = false;
 
                 Navigator.pushNamed(
                   context,
-                  '/tag/',
+                  '/numpad/',
+                  arguments: NumPadArguments(
+                    'Editar budget',
+                    onSubmit: (BuildContext context) async {
+                      final budget = context.read(budgetProvider).state;
+                      final amountPad = context.read(amountPadProvider).state;
+                      final titlePad = context.read(titleProvider).state;
+                      try {
+                        await BudgetCollection.budgets
+                            .doc(budget.budgetId)
+                            .update({
+                          // 'amount': tag.amount, -- TODO: pending to fix this. use the model
+                          'title': titlePad,
+                          'amount': KeyPadUtils.toDouble(amountPad),
+                          'updated_at': DateTime.now(),
+                        });
+                        Navigator.of(context).pop();
+                      } catch (error) {
+                        final snackBar =
+                            SnackBar(content: Text("Sorry, can't update"));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                    },
+                  ),
                 );
               },
               child: Text(
@@ -77,7 +103,7 @@ class BudgetCard extends ConsumerWidget {
             ),
             TextButton(
               onPressed: () {
-                BudgetCollection.budgets.doc(tag.tagId).delete();
+                BudgetCollection.budgets.doc(budget.budgetId).delete();
               },
               child: Text(
                 'Delete',

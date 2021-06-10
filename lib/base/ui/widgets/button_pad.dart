@@ -1,15 +1,13 @@
-import 'dart:math';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wallet_flutter/Budget/model/budget.dart';
-import 'package:wallet_flutter/Budget/provider/buget_provider.dart';
-import 'package:wallet_flutter/Budget/utils/key_pad_utils.dart';
-import 'package:wallet_flutter/Budget/utils/budget_collection.dart';
+import 'package:wallet_flutter/base/provider/pad_provider.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
 class ButtonPad extends StatefulWidget {
+  final Function submit;
+
+  const ButtonPad({Key key, @required this.submit}) : super(key: key);
+
   @override
   _ButtonPadState createState() => _ButtonPadState();
 }
@@ -21,15 +19,24 @@ class _ButtonPadState extends State<ButtonPad> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, watch, child) {
-        final tag = watch(budgetProvider).state;
+        final budget = watch(budgetProvider).state;
         return ElevatedButton(
-          onPressed: () => submit(tag),
+          onPressed: () async {
+            setState(() {
+              loading = true;
+            });
+            await widget.submit(context);
+            setState(() {
+              loading = false;
+            });
+
+          },
           child: Padding(
             padding: EdgeInsets.all(16),
             child: Row(
               children: [
                 Text(
-                  tag?.tagId == null ? 'Add' : 'Edit',
+                  budget?.budgetId == null ? 'Add' : 'Edit',
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -49,44 +56,5 @@ class _ButtonPadState extends State<ButtonPad> {
         );
       },
     );
-  }
-
-  void submit(Budget tag) {
-    final String tagAmount = context.read(budgetAmountProvider).state;
-    setState(() {
-      loading = true;
-    });
-    if (tag?.tagId == null) {
-      BudgetCollection.budgets.add({
-        'title': 'Amount',
-        // 'amount': tag.amount, -- TODO: pending to fix this. use the model
-        'amount': KeyPadUtils.toDouble(tagAmount),
-        'color': Random().nextInt(Colors.primaries.length),
-        'created_at': DateTime.now(),
-        'updated_at': DateTime.now(),
-      }).then((value) {
-        Navigator.of(context).pop();
-      }).catchError((error) {
-        final snackBar = SnackBar(content: Text("Sorry, can't add"));
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        setState(() {
-          loading = false;
-        });
-      });
-    } else {
-      BudgetCollection.budgets.doc(tag.tagId).update({
-        // 'amount': tag.amount, -- TODO: pending to fix this. use the model
-        'amount': KeyPadUtils.toDouble(tagAmount),
-        'updated_at': DateTime.now(),
-      }).then((value) {
-        Navigator.of(context).pop();
-      }).catchError((error) {
-        final snackBar = SnackBar(content: Text("Sorry, can't update"));
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        setState(() {
-          loading = false;
-        });
-      });
-    }
   }
 }

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class Budget extends Equatable {
-  final String tagId;
+  final String budgetId;
   final String title;
   final double amount;
   final int color;
@@ -10,7 +10,7 @@ class Budget extends Equatable {
   final Timestamp updatedAt;
 
   Budget({
-    this.tagId,
+    this.budgetId,
     this.title,
     this.amount,
     this.color,
@@ -20,7 +20,7 @@ class Budget extends Equatable {
 
   @override
   List<Object> get props => [
-        tagId,
+        budgetId,
         title,
         amount,
         color,
@@ -29,7 +29,7 @@ class Budget extends Equatable {
       ];
 
   Budget.fromJsonSnapshot(DocumentSnapshot doc)
-      : tagId = doc.id,
+      : budgetId = doc.id,
         title = doc.get('title'),
         amount = doc.get('amount'),
         color = doc.get('color'),

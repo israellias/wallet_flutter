@@ -29,7 +29,7 @@ class _BudgetsViewerState extends State<BudgetsViewer> {
         return SliverList(
           delegate: SliverChildBuilderDelegate((context, index) {
             return BudgetCard(
-              tag: Budget.fromJsonSnapshot(snapshot.data.docs[index]),
+              budget: Budget.fromJsonSnapshot(snapshot.data.docs[index]),
             );
           }, childCount: length),
         );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:wallet_flutter/Budget/utils/key_enum.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
@@ -9,19 +10,24 @@ class CustomPad extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 8 / 9 * MediaQuery.of(context).size.width,
-      child: GridView.count(
-        crossAxisCount: 3,
-        physics: NeverScrollableScrollPhysics(),
-        childAspectRatio: 3 / 2,
-        children: KeyEnum.values
-            .map<Widget>((e) => Container(
-                  alignment: Alignment.center,
-                  child: buildKey(e),
-                ))
-            .toList(),
-      ),
+    return KeyboardVisibilityBuilder(
+      builder: (context, visibleKeyboard) {
+        if (visibleKeyboard) return SizedBox.shrink();
+        return SizedBox(
+          height: 8 / 9 * MediaQuery.of(context).size.width,
+          child: GridView.count(
+            crossAxisCount: 3,
+            physics: NeverScrollableScrollPhysics(),
+            childAspectRatio: 3 / 2,
+            children: KeyEnum.values
+                .map<Widget>((e) => Container(
+                      alignment: Alignment.center,
+                      child: buildKey(e),
+                    ))
+                .toList(),
+          ),
+        );
+      },
     );
   }
 
