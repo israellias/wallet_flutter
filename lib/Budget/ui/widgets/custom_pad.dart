@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_flutter/Tag/utils/key_enum.dart';
+import 'package:wallet_flutter/Budget/utils/key_enum.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
-class ValiuPad extends StatelessWidget {
+class CustomPad extends StatelessWidget {
   final ValueChanged<KeyEnum> onChanged;
 
-  const ValiuPad({Key key, this.onChanged}) : super(key: key);
+  const CustomPad({Key key, this.onChanged}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class ValiuPad extends StatelessWidget {
     Widget content;
     final textStyle = TextStyle(
       fontSize: 20,
-      color: ValiuColor.gray1,
+      color: AppColor.gray1,
       fontWeight: FontWeight.w500,
     );
     switch (keyEnum) {

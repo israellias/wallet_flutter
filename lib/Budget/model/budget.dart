@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
-class Tag extends Equatable {
+class Budget extends Equatable {
   final String tagId;
   final String title;
   final double amount;
@@ -10,7 +9,7 @@ class Tag extends Equatable {
   final Timestamp createdAt;
   final Timestamp updatedAt;
 
-  Tag({
+  Budget({
     this.tagId,
     this.title,
     this.amount,
@@ -29,7 +28,7 @@ class Tag extends Equatable {
         updatedAt,
       ];
 
-  Tag.fromJsonSnapshot(DocumentSnapshot doc)
+  Budget.fromJsonSnapshot(DocumentSnapshot doc)
       : tagId = doc.id,
         title = doc.get('title'),
         amount = doc.get('amount'),

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wallet_flutter/Tag/provider/tag_provider.dart';
-import 'package:wallet_flutter/Tag/ui/widgets/tag_amount.dart';
-import 'package:wallet_flutter/Tag/ui/widgets/tag_button.dart';
-import 'package:wallet_flutter/Tag/ui/widgets/valiu_pad.dart';
-import 'package:wallet_flutter/Tag/utils/key_enum.dart';
-import 'package:wallet_flutter/Tag/utils/key_pad_utils.dart';
-import 'package:wallet_flutter/base/ui/widgets/valiu_app_bar.dart';
+import 'package:wallet_flutter/Budget/provider/buget_provider.dart';
+import 'package:wallet_flutter/Budget/ui/widgets/budget_amount.dart';
+import 'package:wallet_flutter/Budget/ui/widgets/budget_button.dart';
+import 'package:wallet_flutter/Budget/ui/widgets/custom_pad.dart';
+import 'package:wallet_flutter/Budget/utils/key_enum.dart';
+import 'package:wallet_flutter/Budget/utils/key_pad_utils.dart';
+import 'package:wallet_flutter/base/ui/widgets/custom_app_bar.dart';
 
-class TagScreen extends ConsumerWidget {
+class BudgetScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, watch) {
     return Scaffold(
-      appBar: ValiuAppBar(
+      appBar: CustomAppBar(
         title: 'Add amount tag',
         withLogo: false,
         goBackButton: true,
@@ -30,11 +30,11 @@ class TagScreen extends ConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Expanded(
-                        child: TagAmount(),
+                        child: BudgetAmount(),
                       ),
                       SizedBox(width: 24),
                       Container(
-                        child: TagButton(),
+                        child: BudgetButton(),
                       )
                     ],
                   ),
@@ -42,8 +42,8 @@ class TagScreen extends ConsumerWidget {
               ],
             ),
           ),
-          ValiuPad(onChanged: (KeyEnum keyEnum) {
-            final tagAmountNotifier = context.read(tagAmountProvider.notifier);
+          CustomPad(onChanged: (KeyEnum keyEnum) {
+            final tagAmountNotifier = context.read(budgetAmountProvider.notifier);
             final forceCommaNotifier =
                 context.read(forceCommaProvider.notifier);
             tagAmountNotifier.state = KeyPadUtils.updateAmount(

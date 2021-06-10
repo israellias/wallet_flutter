@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_flutter/Home/ui/widgets/tag_card.dart';
-import 'package:wallet_flutter/Tag/model/tag.dart';
-import 'package:wallet_flutter/Tag/utils/tag_collection.dart';
+import 'package:wallet_flutter/Home/ui/widgets/budget_card.dart';
+import 'package:wallet_flutter/Budget/model/budget.dart';
+import 'package:wallet_flutter/Budget/utils/budget_collection.dart';
 
-class TagsViewer extends StatefulWidget {
+class BudgetsViewer extends StatefulWidget {
   @override
-  _TagsViewerState createState() => _TagsViewerState();
+  _BudgetsViewerState createState() => _BudgetsViewerState();
 }
 
-class _TagsViewerState extends State<TagsViewer> {
+class _BudgetsViewerState extends State<BudgetsViewer> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: TagCollection.tags
+      stream: BudgetCollection.tags
           .orderBy('created_at', descending: true)
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -28,8 +28,8 @@ class _TagsViewerState extends State<TagsViewer> {
         }
         return SliverList(
           delegate: SliverChildBuilderDelegate((context, index) {
-            return TagCard(
-              tag: Tag.fromJsonSnapshot(snapshot.data.docs[index]),
+            return BudgetCard(
+              tag: Budget.fromJsonSnapshot(snapshot.data.docs[index]),
             );
           }, childCount: length),
         );

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wallet_flutter/Tag/model/tag.dart';
-import 'package:wallet_flutter/Tag/provider/tag_provider.dart';
-import 'package:wallet_flutter/Tag/utils/key_pad_utils.dart';
-import 'package:wallet_flutter/Tag/utils/tag_collection.dart';
+import 'package:wallet_flutter/Budget/model/budget.dart';
+import 'package:wallet_flutter/Budget/provider/buget_provider.dart';
+import 'package:wallet_flutter/Budget/utils/key_pad_utils.dart';
+import 'package:wallet_flutter/Budget/utils/budget_collection.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
-class TagCard extends ConsumerWidget {
-  final Tag tag;
+class BudgetCard extends ConsumerWidget {
+  final Budget tag;
 
-  const TagCard({Key key, this.tag}) : super(key: key);
+  const BudgetCard({Key key, this.tag}) : super(key: key);
 
   @override
   Widget build(BuildContext context, watch) {
@@ -41,13 +41,13 @@ class TagCard extends ConsumerWidget {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: ValiuColor.textColor,
+                        color: AppColor.textColor,
                       ),
                     ),
                     Text(
                       tag.title,
                       style: TextStyle(
-                        color: ValiuColor.gray1,
+                        color: AppColor.gray1,
                       ),
                     )
                   ],
@@ -57,9 +57,9 @@ class TagCard extends ConsumerWidget {
             TextButton(
               onPressed: () {
                 // setting current tag;
-                context.read(tagProvider.notifier).state = tag;
+                context.read(budgetProvider.notifier).state = tag;
 
-                context.read(tagAmountProvider.notifier).state =
+                context.read(budgetAmountProvider.notifier).state =
                     KeyPadUtils.format(tag.amount.toString())
                         .replaceAll('.', '');
 
@@ -72,16 +72,16 @@ class TagCard extends ConsumerWidget {
               },
               child: Text(
                 'Edit',
-                style: TextStyle(color: ValiuColor.linkColor),
+                style: TextStyle(color: AppColor.linkColor),
               ),
             ),
             TextButton(
               onPressed: () {
-                TagCollection.tags.doc(tag.tagId).delete();
+                BudgetCollection.tags.doc(tag.tagId).delete();
               },
               child: Text(
                 'Delete',
-                style: TextStyle(color: ValiuColor.red),
+                style: TextStyle(color: AppColor.red),
               ),
             ),
           ],

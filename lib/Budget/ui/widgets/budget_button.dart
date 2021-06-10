@@ -3,25 +3,25 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wallet_flutter/Tag/model/tag.dart';
-import 'package:wallet_flutter/Tag/provider/tag_provider.dart';
-import 'package:wallet_flutter/Tag/utils/key_pad_utils.dart';
-import 'package:wallet_flutter/Tag/utils/tag_collection.dart';
+import 'package:wallet_flutter/Budget/model/budget.dart';
+import 'package:wallet_flutter/Budget/provider/buget_provider.dart';
+import 'package:wallet_flutter/Budget/utils/key_pad_utils.dart';
+import 'package:wallet_flutter/Budget/utils/budget_collection.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
-class TagButton extends StatefulWidget {
+class BudgetButton extends StatefulWidget {
   @override
-  _TagButtonState createState() => _TagButtonState();
+  _BudgetButtonState createState() => _BudgetButtonState();
 }
 
-class _TagButtonState extends State<TagButton> {
+class _BudgetButtonState extends State<BudgetButton> {
   bool loading = false;
 
   @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, watch, child) {
-        final tag = watch(tagProvider).state;
+        final tag = watch(budgetProvider).state;
         return ElevatedButton(
           onPressed: () => submit(tag),
           child: Padding(
@@ -39,7 +39,7 @@ class _TagButtonState extends State<TagButton> {
                   ConstrainedBox(
                     constraints: BoxConstraints.tightFor(width: 15, height: 15),
                     child: CircularProgressIndicator(
-                      backgroundColor: ValiuColor.white,
+                      backgroundColor: AppColor.white,
                       strokeWidth: 2,
                     ),
                   ),
@@ -51,13 +51,13 @@ class _TagButtonState extends State<TagButton> {
     );
   }
 
-  void submit(Tag tag) {
-    final String tagAmount = context.read(tagAmountProvider).state;
+  void submit(Budget tag) {
+    final String tagAmount = context.read(budgetAmountProvider).state;
     setState(() {
       loading = true;
     });
     if (tag?.tagId == null) {
-      TagCollection.tags.add({
+      BudgetCollection.tags.add({
         'title': 'Amount',
         // 'amount': tag.amount, -- TODO: pending to fix this. use the model
         'amount': KeyPadUtils.toDouble(tagAmount),
@@ -74,7 +74,7 @@ class _TagButtonState extends State<TagButton> {
         });
       });
     } else {
-      TagCollection.tags.doc(tag.tagId).update({
+      BudgetCollection.tags.doc(tag.tagId).update({
         // 'amount': tag.amount, -- TODO: pending to fix this. use the model
         'amount': KeyPadUtils.toDouble(tagAmount),
         'updated_at': DateTime.now(),

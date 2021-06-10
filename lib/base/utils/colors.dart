@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ValiuColor {
+class AppColor {
   static const int _primaryValue = 0xFF4953CF;
   static const indigo = Color(_primaryValue);
   static const whiteBlue = Color(0xFF3898EC);

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:wallet_flutter/base/ui/widgets/logo_header.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
-class ValiuAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool withLogo;
   final bool goBackButton;
   final double textSize;
 
-  const ValiuAppBar({
+  const CustomAppBar({
     Key key,
     this.title,
     this.withLogo = true,
@@ -37,7 +37,7 @@ class ValiuAppBar extends StatelessWidget implements PreferredSizeWidget {
             Text(
               title,
               style: TextStyle(
-                color: ValiuColor.titleColor,
+                color: AppColor.titleColor,
                 fontSize: textSize,
                 fontWeight: FontWeight.bold,
               ),

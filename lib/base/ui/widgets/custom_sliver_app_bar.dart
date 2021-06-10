@@ -5,13 +5,13 @@ import 'package:wallet_flutter/User/model/user_extension.dart';
 import 'package:wallet_flutter/User/provider/user_provider.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
-class ValiuSliverAppBar extends ConsumerWidget {
+class CustomSliverAppBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, watch) {
     final user = watch(userProvider) as User;
     return SliverAppBar(
       expandedHeight: 120,
-      backgroundColor: ValiuColor.background,
+      backgroundColor: AppColor.background,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
@@ -38,7 +38,7 @@ class ValiuSliverAppBar extends ConsumerWidget {
                       child: Text(
                         'Presupuesto',
                         style: TextStyle(
-                          color: ValiuColor.titleColor,
+                          color: AppColor.titleColor,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),

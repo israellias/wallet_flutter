@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wallet_flutter/Home/ui/widgets/tags_viewer.dart';
-import 'package:wallet_flutter/Tag/provider/tag_provider.dart';
-import 'package:wallet_flutter/base/ui/widgets/valiu_sliver_app_bar.dart';
+import 'package:wallet_flutter/Budget/provider/buget_provider.dart';
+import 'package:wallet_flutter/Home/ui/widgets/budgets_viewer.dart';
+import 'package:wallet_flutter/base/ui/widgets/custom_sliver_app_bar.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
 class MyHomePage extends ConsumerWidget {
@@ -11,8 +11,8 @@ class MyHomePage extends ConsumerWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-          ValiuSliverAppBar(),
-          TagsViewer(),
+          CustomSliverAppBar(),
+          BudgetsViewer(),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -21,8 +21,8 @@ class MyHomePage extends ConsumerWidget {
           margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: ElevatedButton(
             onPressed: () {
-              context.read(tagProvider.notifier).state = null;
-              context.read(tagAmountProvider.notifier).state = '0';
+              context.read(budgetProvider.notifier).state = null;
+              context.read(budgetAmountProvider.notifier).state = '0';
               context.read(forceCommaProvider.notifier).state = false;
               Navigator.pushNamed(context, '/tag/');
             },
@@ -33,7 +33,7 @@ class MyHomePage extends ConsumerWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
-                  color: ValiuColor.white,
+                  color: AppColor.white,
                 ),
               ),
             ),
