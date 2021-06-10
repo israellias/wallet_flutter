@@ -1,7 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:wallet_flutter/Home/ui/widgets/tag_card.dart';
 import 'package:wallet_flutter/Tag/model/tag.dart';
+import 'package:wallet_flutter/Tag/utils/tag_collection.dart';
 
 class TagsViewer extends StatefulWidget {
   @override
@@ -12,8 +12,7 @@ class _TagsViewerState extends State<TagsViewer> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: FirebaseFirestore.instance
-          .collection('tags')
+      stream: TagCollection.tags
           .orderBy('created_at', descending: true)
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {

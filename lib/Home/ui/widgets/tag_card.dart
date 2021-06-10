@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wallet_flutter/Tag/model/tag.dart';
 import 'package:wallet_flutter/Tag/provider/tag_provider.dart';
 import 'package:wallet_flutter/Tag/utils/key_pad_utils.dart';
+import 'package:wallet_flutter/Tag/utils/tag_collection.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
 class TagCard extends ConsumerWidget {
@@ -60,7 +60,8 @@ class TagCard extends ConsumerWidget {
                 context.read(tagProvider.notifier).state = tag;
 
                 context.read(tagAmountProvider.notifier).state =
-                    KeyPadUtils.format(tag.amount.toString()).replaceAll('.', '');
+                    KeyPadUtils.format(tag.amount.toString())
+                        .replaceAll('.', '');
 
                 context.read(forceCommaProvider.notifier).state = false;
 
@@ -76,10 +77,7 @@ class TagCard extends ConsumerWidget {
             ),
             TextButton(
               onPressed: () {
-                FirebaseFirestore.instance
-                    .collection('tags')
-                    .doc(tag.tagId)
-                    .delete();
+                TagCollection.tags.doc(tag.tagId).delete();
               },
               child: Text(
                 'Delete',

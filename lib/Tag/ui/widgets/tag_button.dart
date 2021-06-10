@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wallet_flutter/Tag/model/tag.dart';
 import 'package:wallet_flutter/Tag/provider/tag_provider.dart';
 import 'package:wallet_flutter/Tag/utils/key_pad_utils.dart';
+import 'package:wallet_flutter/Tag/utils/tag_collection.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
 class TagButton extends StatefulWidget {
@@ -56,7 +57,7 @@ class _TagButtonState extends State<TagButton> {
       loading = true;
     });
     if (tag?.tagId == null) {
-      FirebaseFirestore.instance.collection('tags').add({
+      TagCollection.tags.add({
         'title': 'Amount',
         // 'amount': tag.amount, -- TODO: pending to fix this. use the model
         'amount': KeyPadUtils.toDouble(tagAmount),
@@ -73,7 +74,7 @@ class _TagButtonState extends State<TagButton> {
         });
       });
     } else {
-      FirebaseFirestore.instance.collection('tags').doc(tag.tagId).update({
+      TagCollection.tags.doc(tag.tagId).update({
         // 'amount': tag.amount, -- TODO: pending to fix this. use the model
         'amount': KeyPadUtils.toDouble(tagAmount),
         'updated_at': DateTime.now(),
