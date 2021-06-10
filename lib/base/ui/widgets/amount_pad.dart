@@ -4,7 +4,7 @@ import 'package:wallet_flutter/Budget/provider/buget_provider.dart';
 import 'package:wallet_flutter/Budget/utils/key_pad_utils.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
-class BudgetAmount extends ConsumerWidget {
+class AmountPad extends ConsumerWidget {
   @override
   Widget build(BuildContext context, watch) {
     final forceComma = watch(forceCommaProvider).state;

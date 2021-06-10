@@ -12,7 +12,7 @@ class _BudgetsViewerState extends State<BudgetsViewer> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: BudgetCollection.tags
+      stream: BudgetCollection.budgets
           .orderBy('created_at', descending: true)
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -22,7 +22,7 @@ class _BudgetsViewerState extends State<BudgetsViewer> {
         if (length == 0) {
           return SliverToBoxAdapter(
             child: Center(
-              child: Text('Aún no has agregado tags'),
+              child: Text('Aún no has agregado presupuestos'),
             ),
           );
         }

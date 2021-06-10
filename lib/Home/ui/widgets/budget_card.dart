@@ -77,7 +77,7 @@ class BudgetCard extends ConsumerWidget {
             ),
             TextButton(
               onPressed: () {
-                BudgetCollection.tags.doc(tag.tagId).delete();
+                BudgetCollection.budgets.doc(tag.tagId).delete();
               },
               child: Text(
                 'Delete',

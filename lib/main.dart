@@ -1,9 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wallet_flutter/Home/ui/screens/home.dart';
-import 'package:wallet_flutter/Budget/ui/screens/budget_screen.dart';
 import 'package:wallet_flutter/app_router.dart';
+import 'package:wallet_flutter/base/ui/screens/numpad.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
 void main() {
@@ -86,7 +85,7 @@ class _AppState extends State<MyApp> {
       initialRoute: '/',
       routes: {
         '/': (context) => AppRouter(),
-        '/tag/': (context) => BudgetScreen(),
+        '/tag/': (context) => NumPad(),
       },
     );
   }

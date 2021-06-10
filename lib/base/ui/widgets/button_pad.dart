@@ -9,12 +9,12 @@ import 'package:wallet_flutter/Budget/utils/key_pad_utils.dart';
 import 'package:wallet_flutter/Budget/utils/budget_collection.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
-class BudgetButton extends StatefulWidget {
+class ButtonPad extends StatefulWidget {
   @override
-  _BudgetButtonState createState() => _BudgetButtonState();
+  _ButtonPadState createState() => _ButtonPadState();
 }
 
-class _BudgetButtonState extends State<BudgetButton> {
+class _ButtonPadState extends State<ButtonPad> {
   bool loading = false;
 
   @override
@@ -57,7 +57,7 @@ class _BudgetButtonState extends State<BudgetButton> {
       loading = true;
     });
     if (tag?.tagId == null) {
-      BudgetCollection.tags.add({
+      BudgetCollection.budgets.add({
         'title': 'Amount',
         // 'amount': tag.amount, -- TODO: pending to fix this. use the model
         'amount': KeyPadUtils.toDouble(tagAmount),
@@ -74,7 +74,7 @@ class _BudgetButtonState extends State<BudgetButton> {
         });
       });
     } else {
-      BudgetCollection.tags.doc(tag.tagId).update({
+      BudgetCollection.budgets.doc(tag.tagId).update({
         // 'amount': tag.amount, -- TODO: pending to fix this. use the model
         'amount': KeyPadUtils.toDouble(tagAmount),
         'updated_at': DateTime.now(),
