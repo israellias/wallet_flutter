@@ -1,19 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:wallet_flutter/base/ui/widgets/logo_header.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wallet_flutter/User/provider/user_provider.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
-class ValiuSliverAppBar extends StatelessWidget {
+class ValiuSliverAppBar extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, watch) {
+    final user = watch(userProvider) as User;
     return SliverAppBar(
-      expandedHeight: 160,
+      expandedHeight: 120,
       backgroundColor: ValiuColor.background,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
-        // titlePadding: EdgeInsetsDirectional.only(
-        //   start: 0.0,
-        //   bottom: 16.0,
-        // ),
         centerTitle: true,
         title: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
@@ -31,16 +30,23 @@ class ValiuSliverAppBar extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: Text(
-                        'Amount tags',
+                        'Presupuesto',
                         style: TextStyle(
                           color: ValiuColor.titleColor,
-                          fontSize: 24,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ),
-                  if (!isCollapsed) LogoHeader(),
+                  if (user != null && !isCollapsed)
+                    Text(
+                      user.phoneNumber,
+                      style: TextStyle(
+                        color: ValiuColor.textColor,
+                        fontSize: 12
+                      ),
+                    ),
                 ],
               ),
             );

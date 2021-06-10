@@ -6,7 +6,7 @@ final userProvider = StateNotifierProvider((ref) {
 });
 
 class UserState extends StateNotifier<User> {
-  UserState() : super(null);
+  UserState() : super(FirebaseAuth.instance.currentUser);
 
   void verifySmsCode(String smsCode, String verificationId) async {
     PhoneAuthCredential credential = PhoneAuthProvider.credential(

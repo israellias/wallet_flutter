@@ -9,6 +9,12 @@ class MyHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, watch) {
     return Scaffold(
+      body: CustomScrollView(
+        slivers: <Widget>[
+          ValiuSliverAppBar(),
+          TagsViewer(),
+        ],
+      ),
       bottomNavigationBar: BottomAppBar(
         child: Container(
           width: double.infinity,
@@ -33,12 +39,6 @@ class MyHomePage extends ConsumerWidget {
             ),
           ),
         ),
-      ),
-      body: CustomScrollView(
-        slivers: <Widget>[
-          ValiuSliverAppBar(),
-          TagsViewer(),
-        ],
       ),
     );
   }
