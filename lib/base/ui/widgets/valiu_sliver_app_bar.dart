@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wallet_flutter/User/model/user_extension.dart';
 import 'package:wallet_flutter/User/provider/user_provider.dart';
 import 'package:wallet_flutter/base/utils/colors.dart';
 
@@ -26,9 +27,14 @@ class ValiuSliverAppBar extends ConsumerWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
+                  if (user != null && !isCollapsed)
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(user.gravatar),
+                    ),
                   Expanded(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
+                    child: Container(
+                      margin: EdgeInsets.only(left: 16),
+                      alignment: Alignment.bottomLeft,
                       child: Text(
                         'Presupuesto',
                         style: TextStyle(
@@ -39,14 +45,6 @@ class ValiuSliverAppBar extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  if (user != null && !isCollapsed)
-                    Text(
-                      user.phoneNumber,
-                      style: TextStyle(
-                        color: ValiuColor.textColor,
-                        fontSize: 12
-                      ),
-                    ),
                 ],
               ),
             );
